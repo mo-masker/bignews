@@ -41,7 +41,7 @@ $(function () {
                     // 登录成功，本地存储
                     window.localStorage.setItem('token', res.token)
 
-                    $('#myModal').on('hidden.bs.modal',function(e){
+                    $('#myModal').on('hidden.bs.modal', function (e) {
                         // 跳转到首页
                         window.location.href = './index.html';
                     })
