@@ -34,13 +34,17 @@ $(function () {
             },
             success: function (res) {
                 console.log(res);
+                $('#myModal').modal();
+                $('.modal-body').text(res.msg);
                 //登录成功，跳转管理系统首页
                 if (res.code === 200) {
-                    // 跳转首页
-                    window.location.href = './index.html';
-                } else {
-                    $('#myModal').modal();
-                    $('.modal-body').text(res.msg);
+                    // 登录成功，本地存储
+                    window.localStorage.setItem('token', res.token)
+
+                    $('#myModal').on('hidden.bs.modal',function(e){
+                        // 跳转到首页
+                        window.location.href = './index.html';
+                    })
                 }
             }
         })
