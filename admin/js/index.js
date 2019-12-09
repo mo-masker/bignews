@@ -10,7 +10,7 @@ $(function(){
         type:'get',
         dataType:'json',
         success:function(res){
-            console.log(res);
+            // console.log(res);
             // 获取服务器返回的数据，使用这些数据去渲染页面的内容
             $('.user_info img').attr('src',res.data.userPic); // 头像
             $('.user_info span').html('欢迎&nbsp;&nbsp;'+res.data.nickname); //用户名
