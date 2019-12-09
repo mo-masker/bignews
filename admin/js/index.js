@@ -26,4 +26,24 @@ $(function(){
         // 返回到登录页
         location.href = './login.html'
     })
+
+    // --------第二天
+    // 
+    $('div.level01').on('click',function(){
+        $(this).addClass('active').siblings().removeClass('active');
+
+        if($(this).index() === 1){
+            $('ul.level02').slideToggle();
+            //a标签模拟点击事件需要使用原生DOM元素调用click()方法;jquery对象无法调用,所以在这里我们获取到的a标签的jQuery对象要转换为原生的对象去调用click()这个方法
+            $('ul.level02 li:eq(0) a')[0].click();
+
+            // 点击这个div的时候，让其后面的箭头符号进行旋转，我们是通过添加一个类名的方式来处理
+            $(this).find('b').toggleClass('rotate0');
+        }
+    });
+
+    // 排他
+    $('ul.level02 li').on('click',function(){
+        $(this).addClass('active').siblings().removeClass('active');
+    })
 })
