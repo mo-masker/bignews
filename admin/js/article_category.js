@@ -1,7 +1,7 @@
 $(function () {
     // 先获取所有文章分类渲染在页面上
     getData();
-    function getData(){
+    function getData() {
         $.ajax({
             url: BigNew.category_list,
             type: 'get',
@@ -50,10 +50,10 @@ $(function () {
                         name: name,
                         slug: slug
                     },
-                    success:function(res){
+                    success: function (res) {
                         // console.log(res);
                         // 新增成功隐藏模态框
-                        if(res.code == 201){
+                        if (res.code == 201) {
                             $('#myModal').modal('hide');
                             getData();
                         }
@@ -104,5 +104,29 @@ $(function () {
                 })
             })
         }
+    })
+
+    // 给删除注册一个点击事件  委托删除
+    $('tbody').on('click', "#btn-delete", function () { 
+        // 获取保存在自定义属性里的id
+        let deleteId = $(this).attr('data-id');
+        let ans = confirm('你确定要删除吗？');
+        // console.log(ans); 
+        if(ans){
+            // 结果为true 就发送请求删除数据
+            $.post({
+                url:BigNew.category_delete,
+                data:{
+                    id:deleteId
+                },
+                success:function(res){
+                    // 删除成功后调用getData()重新获取数据刷新页面
+                    if(res.code == 204){
+                        getData();
+                    }
+                }
+            })
+        }
+        
     })
 })
