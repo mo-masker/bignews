@@ -1,14 +1,17 @@
 $(function () {
     // 先获取所有文章分类渲染在页面上
-    $.ajax({
-        url: BigNew.category_list,
-        type: 'get',
-        success: function (res) {
-            // console.log(res);
-            let htmlStr = template('categoryList', res);
-            $('tbody').html(htmlStr)
-        }
-    })
+    getData();
+    function getData(){
+        $.ajax({
+            url: BigNew.category_list,
+            type: 'get',
+            success: function (res) {
+                // console.log(res);
+                let htmlStr = template('categoryList', res);
+                $('tbody').html(htmlStr)
+            }
+        })
+    }
 
 
     // 当点击取消按钮的时候，将表单中的数据全部重置
@@ -48,9 +51,11 @@ $(function () {
                         slug: slug
                     },
                     success:function(res){
+                        // console.log(res);
                         // 新增成功隐藏模态框
-                        if(res.code == 200){
-                            $('myModal').modal('hide');
+                        if(res.code == 201){
+                            $('#myModal').modal('hide');
+                            getData();
                         }
                     }
                 })
@@ -93,6 +98,7 @@ $(function () {
                         // 修改成功隐藏模态框
                         if (res.code == 200) {
                             $('#myModal').modal('hide');
+                            getData()
                         }
                     }
                 })
