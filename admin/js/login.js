@@ -33,7 +33,7 @@ $(function () {
                 password: password
             },
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 $('#myModal').modal();
                 $('.modal-body').text(res.msg);
                 //登录成功，跳转管理系统首页
