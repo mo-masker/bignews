@@ -81,10 +81,10 @@ $(function () {
                     $('#tips').hide();
                     callback(res);
                     // 如果数据的总页数不=0，当前页数据的长度=0，数据的总页数=当前页-1---把当前页-1 ，更新页码
-                }else if(res.data.totalPage != 0 && res.data.data.length == 0 && res.data.totalPage == mypage -1){
+                } else if (res.data.totalPage != 0 && res.data.data.length == 0 && res.data.totalPage == mypage - 1) {
                     mypage -= 1;
-                    $('#pagination-demo').twbsPagination('changeTotalPages',res.data.totalPage, mypage)
-                }else{
+                    $('#pagination-demo').twbsPagination('changeTotalPages', res.data.totalPage, mypage)
+                } else {
                     // 如果数据为空，隐藏页码，显示提示
                     $('#pagination-demo').hide();
                     $('#tips').show();
@@ -140,7 +140,7 @@ $(function () {
         e.preventDefault();
 
 
-        getData(mypage,function(res){
+        getData(mypage, function (res) {
             //搜索到的数据条目是不一样的，所以总的页数是会动态改变的,搜索后的页码默认是1
             $('#pagination-demo').twbsPagination('changeTotalPages', res.data.totalPage, 1)
         });
@@ -162,6 +162,30 @@ $(function () {
         //         $('#pagination-demo').twbsPagination('changeTotalPages', res.data.totalPage, 1)
         //     }
         // });
+    })
+
+    //删除文章  删除是动态生成的，需要使用事件委托来注册
+    $('tbody').on('click', '.delete', function () {
+        let artId = $(this).attr('data-id');
+        // console.log(artId);
+        // 给个判断 点击确定为true，发送id，请求删除
+        if (confirm('你确定要删除吗？')) {
+            $.post({
+                url: BigNew.article_delete,
+                data: {
+                    id: artId
+                },
+                success: function (res) {
+                    // console.log(res);
+                    if (res.code == 204) {
+                        // 删除成功，更新页码
+                        getData(mypage, function (res) {
+                            $('#pagination-demo').twbsPagination('changeTotalPages', res.data.totalPage, mypage)
+                        })
+                    }
+                }
+            })
+        }
     })
 
 
