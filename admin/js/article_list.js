@@ -74,9 +74,20 @@ $(function () {
                 // 获取成功写入模板
                 let htmlStr = template('artList', res);
                 $('tbody').html(htmlStr);
+                // 判断获取的数据不为空且回调函数不为空
                 // 如果回调函数不为空，就把数据传入回调函数，执行下一个功能
-                if (callback != null) {
+                if (res.data.data.length != 0 && callback != null) {
+                    $('#pagination-demo').show();
+                    $('#tips').hide();
                     callback(res);
+                    // 如果数据的总页数不=0，当前页数据的长度=0，数据的总页数=当前页-1---把当前页-1 ，更新页码
+                }else if(res.data.totalPage != 0 && res.data.data.length == 0 && res.data.totalPage == mypage -1){
+                    mypage -= 1;
+                    $('#pagination-demo').twbsPagination('changeTotalPages',res.data.totalPage, mypage)
+                }else{
+                    // 如果数据为空，隐藏页码，显示提示
+                    $('#pagination-demo').hide();
+                    $('#tips').show();
                 }
 
             }
