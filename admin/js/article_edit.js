@@ -17,4 +17,12 @@ $(function(){
         }
     })
 
+    //3.添加日期插件
+    jeDate("#testico", {
+        format: "YYYY-MM-DD",
+        isTime: false,
+        minDate: "2014-09-19 00:00:00",
+        zIndex:30000
+    })
+
 })

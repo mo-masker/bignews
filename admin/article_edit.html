@@ -14,6 +14,8 @@
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <!-- 模板引擎 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 添加日期插件 -->
+    <script src="./libs/jedate/js/jedate.js"></script>
     <!-- 引入路径文件http.js -->
     <script src="./js/http.js"></script>
     <script src="./js/article_edit.js"></script>
@@ -71,9 +73,10 @@
         </div>
     </div>
 
+     <!-- 渲染文章分类数据的模板 -->
     <script type="text/html" id="categoryList">
         {{each data}}
-        <option>{{$value.name}}</option>
+        <option value='{{$value.id}}'>{{$value.name}}</option>
         {{/each}}
     </script>
 </body>
