@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="./libs/jquery-1.12.4.min.js"></script>
   <script src="./libs/template-web.js"></script>
+  <!-- 引入路径文件 -->
+  <script src="./js/http.js"></script>
+  <!-- 引入js -->
+  <script src="./js/comment_list.js"></script>
 </head>
 
 <body>
@@ -32,7 +36,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- <tr>
             <td>小周</td>
             <td>这是一条测试评论，欢迎光临</td>
             <td>《世界，你好》</td>
@@ -138,11 +142,11 @@
               <a href="javascript:editTr( 'rejected',11 );" class="btn btn-warning btn-xs">拒绝</a>
               <a href="javascript:editTr( 'trashed',11 );" class="btn btn-danger btn-xs">删除</a>
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
       <div class="row text-center">
-        <ul class="pagination pagination-sm">
+        <!-- <ul class="pagination pagination-sm">
           <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
           <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
           <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -154,12 +158,28 @@
           <li class="page-item"><a href="#" class="page-link">7</a></li>
           <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
           <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
-        </ul>
+        </ul> -->
         <ul id="pagination" class="pagination-sm"></ul>
       </div>
 
     </div>
   </div>
+
+  <script type="text/html" id="commentList">
+    {{each data.data}}
+    <tr>
+        <td>{{$value.author}}</td>
+        <td>{{$value.content}}</td>
+        <td>{{$value.title}}</td>
+        <td>{{$value.date}}</td>
+        <td>{{$value.state}}</td>
+        <td class="text-center">
+          <a href="javascript:void(0);;" class="btn btn-warning btn-xs">拒绝</a>
+          <a href="javascript:void(0);;" class="btn btn-danger btn-xs">删除</a>
+        </td>
+      </tr>
+    {{/each}}
+  </script>
 </body>
 
 </html>
