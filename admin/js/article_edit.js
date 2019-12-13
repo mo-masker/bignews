@@ -31,4 +31,7 @@ $(function () {
     // 或者 var editor = new E( document.getElementById('editor') )
     editor.create()
 
+
+    
+
 })
