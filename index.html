@@ -197,13 +197,13 @@
             <div class="common_wrap">
                 <h3><i class="fa fa-bullseye"></i> 焦点关注</h3>
                 <ul class="content_list guanzhu_list">
-                    <li><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
+                    <!-- <li><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-                    <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
+                    <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li> -->
                 </ul>
             </div>
         </div>
@@ -271,10 +271,15 @@
         {{else}}
             <li><span>
         {{/if}}
-            {{$index+1}}</span><a href="#">{{$value.title}}</a></li>
-                    <!-- </span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-                    </span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li> -->
-                    <!-- <li><span>4</span><a href="#">{{$value.title}}</a></li> -->
+            {{$index+1}}</span><a href="./article.html?id={{$value.id}}">{{$value.title}}</a></li>
+                    
+        {{/each}}
+    </script>
+
+    <!-- 焦点关注 -->
+    <script type="text/html" id="focus">
+        {{each data}}
+        <li><a href="#">{{$value.intro}}</a></li>
         {{/each}}
     </script>
 
@@ -310,7 +315,16 @@
                 }
             })
 
-            
+            // 焦点关注
+            $.get({
+                url: 'http://localhost:8080/api/v1/index/attention',
+                success: function (res) {
+                    // console.log(res);
+                    let htmlStr = template('focus', res)
+                    $('.guanzhu_list').html(htmlStr)
+                }
+            })
+
 
         })
     </script>
