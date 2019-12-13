@@ -3,7 +3,7 @@ $(function () {
     // 设置默认页面与显示条数
     let mypage = 1;
     let perpage = 10;
-    function getComData(mypage,callback) {
+    function getComData(mypage, callback) {
         $.get({
             url: BigNew.comment_list,
             data: {
@@ -11,7 +11,7 @@ $(function () {
                 perpage: perpage
             },
             success: function (res) {
-                console.log(res);
+                // console.log(res);
                 // 获取成功将数据写入模板，与文章列表页一样
                 let htmlStr = template('commentList', res);
                 $('tbody').html(htmlStr);
@@ -36,5 +36,19 @@ $(function () {
     }
 
     // 调用函数加载数据
-    getComData(mypage,function(){})
+    getComData(mypage, function (res) {
+        // 显示页码,绑定数据
+        $('#pagination').twbsPagination({
+            totalPages: res.data.totalPage,
+            visiblePages: 7,
+            first: '首页',
+            prev: '上一页',
+            next: '下一页',
+            last: '尾页',
+            onPageClick: function (event, page) {
+                mypage = page,
+                getComData(mypage,function(){});
+             }
+        })
+    })
 })

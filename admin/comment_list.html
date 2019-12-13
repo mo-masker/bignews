@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="./libs/jquery-1.12.4.min.js"></script>
   <script src="./libs/template-web.js"></script>
+  <script src="./libs/jquery.twbsPagination.js"></script>
   <!-- 引入路径文件 -->
   <script src="./js/http.js"></script>
   <!-- 引入js -->
@@ -174,7 +175,13 @@
         <td>{{$value.date}}</td>
         <td>{{$value.state}}</td>
         <td class="text-center">
+          {{if $value.state == '待审核'}}
+          <a href="javascript:void(0);;" class="btn btn-success btn-xs">通过</a>
+          {{else if $value.state == '已通过'}}
           <a href="javascript:void(0);;" class="btn btn-warning btn-xs">拒绝</a>
+          {{else if $value.state == '已拒绝'}}
+          <a href="javascript:void(0);;" class="btn btn-success btn-xs">通过</a>
+          {{/if}}
           <a href="javascript:void(0);;" class="btn btn-danger btn-xs">删除</a>
         </td>
       </tr>
