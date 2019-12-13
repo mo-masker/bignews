@@ -176,13 +176,13 @@
         <td>{{$value.state}}</td>
         <td class="text-center">
           {{if $value.state == '待审核'}}
-          <a href="javascript:void(0);;" class="btn btn-success btn-xs">通过</a>
+          <a href="javascript:void(0);;" data-id='{{$value.id}}' class="btn btn-success btn-xs btn-pass">通过</a>
           {{else if $value.state == '已通过'}}
-          <a href="javascript:void(0);;" class="btn btn-warning btn-xs">拒绝</a>
+          <a href="javascript:void(0);;" data-id='{{$value.id}}' class="btn btn-warning btn-xs btn-nopass">拒绝</a>
           {{else if $value.state == '已拒绝'}}
-          <a href="javascript:void(0);;" class="btn btn-success btn-xs">通过</a>
+          <a href="javascript:void(0);;" data-id='{{$value.id}}' class="btn btn-success btn-xs btn-pass">通过</a>
           {{/if}}
-          <a href="javascript:void(0);;" class="btn btn-danger btn-xs">删除</a>
+          <a href="javascript:void(0);;" data-id='{{$value.id}}' class="btn btn-danger btn-xs btn-delete">删除</a>
         </td>
       </tr>
     {{/each}}

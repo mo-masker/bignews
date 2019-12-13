@@ -11,7 +11,7 @@ $(function () {
                 perpage: perpage
             },
             success: function (res) {
-                // console.log(res);
+                console.log(res);
                 // 获取成功将数据写入模板，与文章列表页一样
                 let htmlStr = template('commentList', res);
                 $('tbody').html(htmlStr);
@@ -50,5 +50,62 @@ $(function () {
                 getComData(mypage,function(){});
              }
         })
+    })
+
+    // 给功能按钮注册点击事件  委托事件
+
+    // 通过  
+    $('tbody').on('click','.btn-pass',function(){
+        // 获取id来操作对应的数据
+        let id = $(this).attr('data-id');
+        $.post({
+            url:BigNew.comment_pass,
+            data:{
+                id : id
+            },
+            success:function(res){
+                // console.log(res);
+                // 通过之后加载当前数据更新当前的页面数据状态
+                getComData(mypage,function(){});
+            }
+        })
+    })
+
+    // 拒绝
+    $('tbody').on('click','.btn-nopass',function(){
+        // 获取id来操作对应的数据
+        let id = $(this).attr('data-id');
+        $.post({
+            url:BigNew.comment_reject,
+            data:{
+                id : id
+            },
+            success:function(res){
+                // console.log(res);
+                // 拒绝之后加载当前数据更新当前的页面数据状态
+                getComData(mypage,function(){});
+            }
+        })
+    })
+
+    // 删除
+    $('tbody').on('click','.btn-delete',function(){
+        // 获取id来操作对应的数据
+        let id = $(this).attr('data-id');
+        if(confirm('你确定要删除吗？')){
+            $.post({
+                url:BigNew.comment_delete,
+                data:{
+                    id : id
+                },
+                success:function(res){
+                    // console.log(res);
+                    // 删除之后重新加载数据显示当前的页面的数据
+                    getComData(mypage,function(res){
+                        $('#pagination').twbsPagination('changeTotalPages',res.data.totalPage,mypage)
+                    });
+                }
+            })
+        }
     })
 })
