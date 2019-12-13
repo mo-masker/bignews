@@ -150,13 +150,13 @@
             <div class="common_wrap">
                 <h3><i class="fa fa-bar-chart"></i> 一周热门排行</h3>
                 <ul class="content_list hotrank_list">
-                    <li><span class="first">1</span><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
+                    <!-- <li><span class="first">1</span><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
                     <li><span class="second">2</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><span class="third">3</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><span>4</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><span>5</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><span>6</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
-                    <li><span>7</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
+                    <li><span>7</span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li> -->
                 </ul>
             </div>
             <div class="common_wrap">
@@ -259,6 +259,25 @@
         {{/each}}    
     </script>
 
+    <!-- 一周热门排行 -->
+    <script type="text/html" id="hotrankList">
+        {{each data}}
+        {{if $index == 0}}
+        <li><span class="first">
+        {{else if $index == 1}}
+        <li><span class="second">
+        {{else if $index == 2}}
+        <li><span class="third">
+        {{else}}
+            <li><span>
+        {{/if}}
+            {{$index+1}}</span><a href="#">{{$value.title}}</a></li>
+                    <!-- </span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
+                    </span><a href="#">神奇的水滴摄影，泡泡中的世界</a></li> -->
+                    <!-- <li><span>4</span><a href="#">{{$value.title}}</a></li> -->
+        {{/each}}
+    </script>
+
     <script>
         $(function () {
             // 获取热点图数据
@@ -280,7 +299,19 @@
                     $('.common_news').html(htmlStr)
                 }
             })
+
+            // 一周热门排行
+            $.get({
+                url: 'http://localhost:8080/api/v1/index/rank',
+                success: function (res) {
+                    console.log(res);
+                    let htmlStr = template('hotrankList', res)
+                    $('.hotrank_list').html(htmlStr)
+                }
+            })
+
             
+
         })
     </script>
 
